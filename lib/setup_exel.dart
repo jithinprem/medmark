@@ -4,10 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 String curEndPoint = 'None';
 
-setEndPoint(String endpoint) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  await prefs.setString('endpoint', endpoint);
-}
+
 
 class SetupExel extends StatefulWidget {
   static const String id = 'setupexel';
@@ -32,6 +29,8 @@ class _SetupExelState extends State<SetupExel> {
   TextEditingController endpointController = TextEditingController();
   String endpoint = 'NOT SET!';
   var myicon = Icons.not_interested_rounded;
+  String statusText = 'end point not set !';
+  Color myicon_color = Colors.redAccent;
 
   @override
   void initState() {
@@ -39,13 +38,36 @@ class _SetupExelState extends State<SetupExel> {
     getMyString();
   }
 
+  setEndPoint(String endpoint) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('endpoint', endpoint);
+    setState((){
+      this.myicon_color = Colors.lightGreen;
+      this.statusText = 'end point set :)';
+    });
+
+  }
+
   void getMyString() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String myString = prefs.getString('endpoint') ?? 'NOT SET!';
     setState(() {
       this.endpoint = myString;
+      this.myicon = myString == 'NOT SET!' ? Icons.not_interested_rounded : Icons.verified;
+      this.statusText = myString == 'NOT SET!' ? 'end point not set! follow instructions' : 'end point set :)';
+      this.myicon_color = myString == 'NOT SET!' ? Colors.redAccent : Colors.lightGreen;
     });
     Return_set_notset_Icon();
+  }
+
+  void removeShared()async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('endpoint');
+    setState((){
+      this.myicon = Icons.not_interested_rounded;
+      this.myicon_color = Colors.redAccent;
+      this.statusText = 'end point not set! follow instructions';
+    });
   }
 
   Return_set_notset_Icon() {
@@ -118,7 +140,7 @@ class _SetupExelState extends State<SetupExel> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: SizedBox(
-                          height: 30,
+                          height: 50,
                           child: TextField(
                             controller: endpointController,
                             decoration: InputDecoration(
@@ -156,16 +178,21 @@ class _SetupExelState extends State<SetupExel> {
                           child: ListTile(
                               leading: Icon(
                                 myicon,
-                                color: endpoint == 'NOT SET!'
-                                    ? Colors.redAccent
-                                    : Colors.lightGreen,
+                                color: myicon_color,
                               ),
                               title: Text(
-                                endpoint == 'NOT SET!'
-                                    ? 'Endpoint not set ! follow the instructions'
-                                    : 'End point is set !',
+                                statusText,
                                 style: TextStyle(color: Colors.white60),
-                              ))),
+                              ),
+                            trailing: TextButton(
+                              child: Text('Remove', style: TextStyle(color: Colors.orangeAccent),),
+                              onPressed: (){
+                                //remove shared prefrence
+                                removeShared();
+                              },
+                            ),
+                          )
+                      ),
                       Expanded(
                         flex: 2,
                         child: Container(
