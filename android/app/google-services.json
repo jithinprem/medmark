@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "945367027132",
+    "project_id": "medclk-1b3b3",
+    "storage_bucket": "medclk-1b3b3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:945367027132:android:9253cc02f195bf1d566fb9",
+        "android_client_info": {
+          "package_name": "com.example.medmark"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "945367027132-oko6dmrfr7srff1s3sqv06sqmecrr27u.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAC1bH1DEFCi4YBoZWXEZunUSyughZvWic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "945367027132-oko6dmrfr7srff1s3sqv06sqmecrr27u.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
