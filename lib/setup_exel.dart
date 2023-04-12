@@ -112,10 +112,9 @@ class _SetupExelState extends State<SetupExel> {
                                   ),
                                 ),
                               ),
-                              Expanded(
-                                child: Container(
-                                  color: Colors.grey[900],
-                                ),
+                              Image.asset(
+                                'assets/images/pic$index.png',
+                                fit: BoxFit.cover,
                               ),
                               ListTile(
                                 title: Padding(
