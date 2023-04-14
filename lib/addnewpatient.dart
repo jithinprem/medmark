@@ -157,8 +157,10 @@ class _AddPatientState extends State<AddPatient> {
                                 if(_additionCommentController.text == Null){
                                   _additionCommentController.text = 'no comments';
                                 }
-                                var addDataPat = AddPatientData(patient_id: _patientIdController.text, fullname: _nameController.text, painval: _slider_vals[0].toString(), tiredness: _slider_vals[1].toString(), drowsiness: _slider_vals[2].toString(), lack_aptitite: _slider_vals[4].toString(), shortness_breath: _slider_vals[5].toString(), depression: _slider_vals[6].toString(), anxiety: _slider_vals[7].toString(), nausea: _slider_vals[3].toString(), wellbeing: _slider_vals[8].toString(), additional_comment: _additionCommentController.text);
+                                String add_cmt = _additionCommentController.text.length > 0 ? _additionCommentController.text : 'no comments';
+                                var addDataPat = AddPatientData(patient_id: _patientIdController.text, fullname: _nameController.text, painval: _slider_vals[0].toString(), tiredness: _slider_vals[1].toString(), drowsiness: _slider_vals[2].toString(), lack_aptitite: _slider_vals[4].toString(), shortness_breath: _slider_vals[5].toString(), depression: _slider_vals[6].toString(), anxiety: _slider_vals[7].toString(), nausea: _slider_vals[3].toString(), wellbeing: _slider_vals[8].toString(), additional_comment: add_cmt);
                                 UserRepository().add_my_patient(addDataPat);
+                                UserRepository().addToExel(addDataPat, context);
                                 //UserRepository().addUserVal(addDataPat);
                                 // add to exel
                               }

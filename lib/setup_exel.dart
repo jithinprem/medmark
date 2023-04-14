@@ -1,6 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 String curEndPoint = 'None';
 
@@ -18,13 +21,19 @@ class _SetupExelState extends State<SetupExel> {
   final List<String> titles = [
     'Copy Code',
     'Open SpreadSheet',
-    'Open AppScripts',
     'Paste code',
-    'MakeChanges',
-    'Save and Run',
     'Deploy',
-    'Deploy instruction',
-    'Copy endpoint'
+    'MakeChanges',
+    'Copy and paste in the app',
+
+  ];
+  List<String> instructions = [
+    'Open link given link and copy the code: \n\nhttps://tinyurl.com/prasunscript\nor\nhttps://github.com/jithinprem/appscript_exel_update/blob/master/appscript.js ',
+    'Open a new google speradsheet set your sheet name "Sheet1" in the example, and then click on extensions then Apps script',
+    'Paste code and save it\n\run the file',
+    'On top right deploy the code and chose New Deployment',
+    'Set The description and set the "who has access" to anyone\nclick on deploy',
+    'copy the URL, this is your end point '
   ];
   TextEditingController endpointController = TextEditingController();
   String endpoint = 'NOT SET!';
@@ -88,7 +97,7 @@ class _SetupExelState extends State<SetupExel> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Expanded(
-                flex: 5,
+                flex: 4,
                 child: SizedBox(
                   height: 400,
                   child: ListView.builder(
@@ -108,21 +117,26 @@ class _SetupExelState extends State<SetupExel> {
                                   titles[index],
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 18,
+                                    fontSize: 25,
+                                    color: Colors.white60
                                   ),
                                 ),
                               ),
-                              Image.asset(
-                                'assets/images/pic$index.png',
-                                fit: BoxFit.cover,
-                              ),
-                              ListTile(
-                                title: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Text(
-                                      'open the link and copy the code written with all your strength so that you can defeat the enemy\n and if '
-                                      'he comes again go and take out the sword'),
+                              Expanded(
+                                child: Image(
+                                  //fit: BoxFit.contain,
+                                  width: double.infinity,
+                                  image: AssetImage('lib/assets/images/pic$index.png'),
+                                  //fit: BoxFit.cover,
                                 ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: ListTile(
+                                    title: Text(
+                                     instructions[index],
+                                    ),
+                                  ),
                               ),
                             ],
                           ),

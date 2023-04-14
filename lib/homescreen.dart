@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medmark/addnewpatient.dart';
+import 'package:medmark/search.dart';
 import 'package:medmark/setup_exel.dart';
 import 'package:medmark/test.dart';
 
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
                   ElevatedButton(onPressed: takeToAdd, child: Text('add')),
-                  ElevatedButton(onPressed: (){Navigator.pushNamed(context, Display.id);}, child: Text('search')),
+                  ElevatedButton(onPressed: (){Navigator.pushNamed(context, Search.id);}, child: Text('search')),
                   ElevatedButton(onPressed: (){Navigator.pushNamed(context, SetupExel.id);}, child: Text('instructions')),
 
                 ],
