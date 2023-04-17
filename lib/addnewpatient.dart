@@ -34,27 +34,24 @@ class _AddPatientState extends State<AddPatient> {
         home: Scaffold(
           body: Column(
             children: <Widget>[
-              Expanded(
-                flex: 2,
+              SizedBox(
+                height: 200,
                 child: Column(
                   children: <Widget>[
-                    Expanded(
+                    Container(
                       child: Row(
                         children: <Widget>[
-                          Text(
-                            'MEDIC ',
-                            style: TextStyle(fontSize: 40),
+                          // logo goes here
+                          Image.asset('lib/assets/images/logo.png', height: 100, width: 100,),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text('Hi  Prasun P', style: TextStyle(fontSize: 20, color: Colors.white54),),
+                              Text('welcome to Medclk')
+                            ],
                           ),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(30),
-                              color: Color(0xFF34495e),
-                            ),
-                          ),
-                          Text(' ck', style: TextStyle(fontSize: 29),)
                         ],
                       ),
-
                     ),
                     Expanded(
                       child: Row(
@@ -63,12 +60,14 @@ class _AddPatientState extends State<AddPatient> {
                             child: Padding(
                               padding: const EdgeInsets.only(left: 6.0,right: 2.0, ),
                               child: TextField(
+
                                 controller: _patientIdController,
                                 decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 hintText: 'Id',
+
                               ),
-                          ),
+                            ),
                             ),
                           ),
                           Expanded(

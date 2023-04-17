@@ -31,7 +31,8 @@ class UserRepository extends GetxController{
     final CollectionReference dateCollectionRef = patientDocRef.collection('date');
     DateTime now = DateTime.now();
     String formattedDate = '${now.day}-${now.month}-${now.year}';
-    formattedDate = '11-4-2023';
+    //formattedDate = formattedDate + '';
+    formattedDate = '12-4-2023';
     final Map<String, dynamic> marksData = {
         'name' : addDataPat.fullname,
         'pain' : addDataPat.painval,

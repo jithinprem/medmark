@@ -27,14 +27,38 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Scaffold(
           body: Column(
             children: <Widget>[
-              Row(
-                children: <Widget>[
-                  Text('MEDIC ', style: TextStyle(fontSize: 32,),),
-                  Text('CK'),
-                  SizedBox(
-                    width: 10,
-                  ),
-                ],
+              Container(
+                height: 200,
+                decoration: BoxDecoration(
+                    color: Colors.black38,
+                  borderRadius: BorderRadius.only(bottomLeft: Radius.circular(15), bottomRight: Radius.circular(15))
+                ),
+
+                child: Column(
+                  children: [
+                    Row(
+                      children: <Widget>[
+                        Stack(
+                          children: <Widget>[
+                            Image.asset('lib/assets/images/logo.png', height: 150, width: 150,),
+                            Positioned(
+                              top: 90,
+                              left: 22,
+                              child: Text(
+                                'medclk',
+                                style: TextStyle(
+                                  color: Colors.white70,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -45,15 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 ],
               ),
-              Column(
-                children: <Widget>[
-                  ListTile(
-                    title: Text('History'),
-                    leading: Icon(Icons.history, color: Colors.white,),
-                    tileColor: Colors.black38,
-                  ),
-                ],
-              ),
+
 
 
             ],

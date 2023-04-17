@@ -35,8 +35,19 @@ class Search extends StatefulWidget {
 class _SearchState extends State<Search> {
   // class variable
   TextEditingController patientIdController = TextEditingController();
+
+  // normal variables
+  String username = 'Hello Prasun';
+  String userid = 'welcome';
+
+
+  // lists
   List<Map<String, dynamic>> detailList = [];
   List<DocumentSnapshot> _searchResults = [];
+  List<PatientData> patientDataList = [];
+  List<List<PatientData>> totalPatientList = [];
+
+
 
   // function to retrive the firebase data of the patient
   patientFiredata(String id) async {
@@ -67,6 +78,10 @@ class _SearchState extends State<Search> {
         final String shortness_breath = dateDoc.get('shortness_breath');
         final String tiredness = dateDoc.get('tiredness');
         print('Date: $date, Data: $name');
+        setState(() {
+          username = name;
+          userid = 'patient Id : ' + id;
+        });
 
         // create a dictionary and add values
         this.detailList.add({
@@ -83,17 +98,21 @@ class _SearchState extends State<Search> {
           'shortness_breath': dateDoc.get('shortness_breath'),
           'tiredness': dateDoc.get('tiredness'),
         });
-        List<PatientData> patientDataList = [
-          PatientData('pain 🤕', 7),
-          PatientData('drowsiness', 3),
-          PatientData('anxiety 😰', 5),
-          PatientData('depression', 4),
-          PatientData('nausea', 7),
-          PatientData('short 😮‍💨',9),
-          PatientData('tiredness', 4),
-          PatientData('lack 😋', 1),
-          PatientData('wellbeing', 4),
+        print('value of the pain is : '+  pain);
+        this.patientDataList = [
+          PatientData('pain 🤕', double.parse(pain).toInt()),
+          PatientData('drowsiness', double.parse(drowsiness).toInt()),
+          PatientData('anxiety 😰', double.parse(anxiety).toInt()),
+          PatientData('depression', double.parse(depression).toInt()),
+          PatientData('nausea', double.parse(nausea).toInt()),
+          PatientData('short 😮‍💨', double.parse(shortness_breath).toInt()),
+          PatientData('tiredness', double.parse(tiredness).toInt()),
+          PatientData('lack 😋', double.parse(lack_appetite).toInt()),
+          PatientData('wellbeing', double.parse(best_wellbeing).toInt()),
         ];
+
+        totalPatientList.add(this.patientDataList);
+
       }
     } else {
       // if the date subcollection is empty, the patient data for all dates does not exist
@@ -129,6 +148,11 @@ class _SearchState extends State<Search> {
           ],
         ),
         body: Column(children: <Widget>[
+          ListTile(
+            title: Text(username, style: TextStyle(color: Colors.white24, fontSize: 26),),
+            subtitle: Text('${userid}'),
+            tileColor: Colors.black38,
+          ),
           Expanded(
             child: ListView.builder(
               itemCount: this.detailList.length,
@@ -157,7 +181,7 @@ class _SearchState extends State<Search> {
                       title: ChartTitle(text: 'Dated :' + date, textStyle: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.w700, fontSize: 12)),
                       series: <ChartSeries>[
                         ColumnSeries<PatientData, String>(
-                          dataSource: patientDataList,
+                          dataSource: this.totalPatientList[index],
                           xValueMapper: (PatientData data, _) => data.category,
                           yValueMapper: (PatientData data, _) => data.value,
                           dataLabelSettings: DataLabelSettings(isVisible: true),
