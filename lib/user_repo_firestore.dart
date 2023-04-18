@@ -24,7 +24,7 @@ class UserRepository extends GetxController{
   final _db = FirebaseFirestore.instance;
 
   // this function is used to add user to firebase firestore
-  add_my_patient(AddPatientData addDataPat){
+  add_my_patient(AddPatientData addDataPat, context){
     print('add_my_patient is being called');
     final CollectionReference patients_collection_ref = FirebaseFirestore.instance.collection('patient');
     final String patient_id = addDataPat.patient_id;
@@ -47,12 +47,20 @@ class UserRepository extends GetxController{
         'best_wellbeing' : addDataPat.wellbeing,
         'additional_comments' : addDataPat.additional_comment,
     };
-    dateCollectionRef.doc(formattedDate).set(marksData);
+    dateCollectionRef.doc(formattedDate).set(marksData).then((value) {
+      print('patient data added successfully!');
+      // add to exel from here
+      addToExel(addDataPat, context);
+
+    }).catchError((error) {
+      print('Failed to add patient data: $error');
+
+    });
 
   }
 
   // just a sample function to test
-  addUserVal(AddPatientData addDataPat){
+  /*addUserVal(AddPatientData addDataPat){
     print('ADD DATA BEIGN EXECUTED');
     _db.collection("Patients").add(addDataPat.toJson()).whenComplete(() =>
       Get.snackbar("Success", "data entered to firestore",
@@ -71,6 +79,7 @@ class UserRepository extends GetxController{
 
     });
   }
+  */
 
   // get the endpoint
   getEndpoint() async{

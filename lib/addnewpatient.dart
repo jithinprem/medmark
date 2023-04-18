@@ -6,6 +6,8 @@ import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'listgen.dart';
 import 'user_repo_firestore.dart';
 
+FocusNode focusNode = FocusNode();
+
 class AddPatient extends StatefulWidget {
   static const String id = 'addnew';
   const AddPatient({Key? key}) : super(key: key);
@@ -27,7 +29,7 @@ class _AddPatientState extends State<AddPatient> {
   final _nameController = TextEditingController();
   final _patientIdController = TextEditingController();
   final _additionCommentController = TextEditingController();
-  final _focusNode = FocusNode();
+
 
 
   @override
@@ -35,7 +37,7 @@ class _AddPatientState extends State<AddPatient> {
     _nameController.dispose();
     _patientIdController.dispose();
     _additionCommentController.dispose();
-    _focusNode.dispose();
+    focusNode.dispose();
     super.dispose();
   }
 
@@ -167,14 +169,14 @@ class _AddPatientState extends State<AddPatient> {
                           child: ElevatedButton(
                             onPressed: () {
                               // close keybord
-                              _focusNode.unfocus();
+                              focusNode.unfocus();
 
                               // checking if the the patient id and name is written or not
                               if(_patientIdController.text.length > 0 && _nameController.text.length > 0){
                                 String add_cmt = _additionCommentController.text.length > 0 ? _additionCommentController.text : 'no comments';
                                 var addDataPat = AddPatientData(patient_id: _patientIdController.text.trim(), fullname: _nameController.text.trim(), painval: _slider_vals[0].toString(), tiredness: _slider_vals[1].toString(), drowsiness: _slider_vals[2].toString(), lack_aptitite: _slider_vals[4].toString(), shortness_breath: _slider_vals[5].toString(), depression: _slider_vals[6].toString(), anxiety: _slider_vals[7].toString(), nausea: _slider_vals[3].toString(), wellbeing: _slider_vals[8].toString(), additional_comment: add_cmt);
-                                UserRepository().add_my_patient(addDataPat);
-                                UserRepository().addToExel(addDataPat, context);
+                                UserRepository().add_my_patient(addDataPat, context);
+                                //UserRepository().addToExel(addDataPat, context);
                               }
                               else{
                                 // patient name and id not written create a alert popup
@@ -236,7 +238,9 @@ class _AddPatientState extends State<AddPatient> {
                     inactiveColor: Colors.black38,
                     //minorTicksPerInterval: 1,
                     onChanged: (dynamic value) {
+                      focusNode.unfocus();
                       setState(() {
+                        focusNode.unfocus();
                         //_slider_vals[selectedIndex] = value;
                         _slider_vals[selectedIndex] = value;
                       });

@@ -166,38 +166,29 @@ class _HomeScreenState extends State<HomeScreen> {
 
                 ],
               ),
-              Card(
-                color: Colors.grey[900],
-                child: Column(
-                  children: <Widget>[
-                    ListTile(
-                      title: Text(
-                        'Analyze trends',
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      tileColor: Colors.grey[900],
-                    ),
-                    SizedBox(
-                      height: 130,
-                      child: SfCartesianChart(
-                        primaryXAxis: NumericAxis(),
-                        primaryYAxis: NumericAxis(),
-                        series: <LineSeries<DataPoint, num>>[
-                          LineSeries<DataPoint, num>(
-                            dataSource: dataPoints,
-                            //splineType: SplineType.cardinal,
-                            xValueMapper: (DataPoint dp, _) => dp.x,
-                            yValueMapper: (DataPoint dp, _) => dp.y,
-                            animationDuration: 1500,
-                            enableTooltip: true,
-                            width: 3,
-                            markerSettings: MarkerSettings(isVisible: true),
-                            color: Color(0xBB006400),
+              GestureDetector(
+                onTap: (){
+                  print('card was clicked');
+                },
+                child: Card(
+                  color: Colors.grey[900],
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        ListTile(
+                          title: Text(
+                            'Analyze trends',
+                            style: GoogleFonts.lato(fontWeight: FontWeight.bold, color: Colors.white38),
                           ),
-                        ],
-                      ),
+                          tileColor: Colors.grey[900],
+                        ),
+                        Container(
+                          child: Image.asset('lib/assets/images/graph.png', height: 120, width: 500,),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
               Expanded(

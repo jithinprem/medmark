@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medmark/test.dart';
 
+import 'addnewpatient.dart';
+
 //global variable
 int selectedIndex = 0; // to see which column is selected
 
