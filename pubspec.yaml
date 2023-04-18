@@ -41,7 +41,8 @@ dependencies:
   shared_preferences: ^2.1.0
   url_launcher: ^6.1.10
   http: ^0.13.5
-  syncfusion_flutter_charts: ^21.1.39
+  syncfusion_flutter_charts: ^21.1.41
+  google_fonts: ^4.0.3
 
 dev_dependencies:
   flutter_test:

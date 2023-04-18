@@ -5,10 +5,10 @@ packages:
     dependency: transitive
     description:
       name: _flutterfire_internals
-      sha256: "330d7fcbb72624f5b6d374af8b059b0ef4ba96ba5b8987f874964a1287eb617d"
+      sha256: "6a0ad72b2bcdb461749e40c01c478212a78db848dfcb2f10f2a461988bc5fb29"
       url: "https://pub.dev"
     source: hosted
-    version: "1.0.18"
+    version: "1.1.1"
   async:
     dependency: transitive
     description:
@@ -45,26 +45,26 @@ packages:
     dependency: "direct main"
     description:
       name: cloud_firestore
-      sha256: "0ad93f01816ab7e59560bffeece2d19cec872fedfea04a7ad5be418cad25d574"
+      sha256: "17b4bac19f367ba1bd84239493a9a4182730221e4780334dd9cd57c4f13eccb7"
       url: "https://pub.dev"
     source: hosted
-    version: "4.4.5"
+    version: "4.5.2"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
-      sha256: "6255cf3ad845d44c6c69a7db51139c8d90691e435dd175578f6365f10c023fcc"
+      sha256: "76ba7b9dd43ce7f07e75a2349f3eb3e2c61e1bea88fec4798c3377cccf44cd7a"
       url: "https://pub.dev"
     source: hosted
-    version: "5.11.5"
+    version: "5.12.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
-      sha256: "3bc08abdeb21a59e80491aee827895aaa3c6da602bad9ab68d83e1ab13c951b1"
+      sha256: "0c1305722339e0b3fc0ce62bf6233b3f8762cc105a26af02171b849e6a3b3727"
       url: "https://pub.dev"
     source: hosted
-    version: "3.3.5"
+    version: "3.4.2"
   collection:
     dependency: transitive
     description:
@@ -73,6 +73,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.17.0"
+  crypto:
+    dependency: transitive
+    description:
+      name: crypto
+      sha256: aa274aa7774f8964e4f4f38cc994db7b6158dd36e9187aaceaddc994b35c6c67
+      url: "https://pub.dev"
+    source: hosted
+    version: "3.0.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -109,26 +117,26 @@ packages:
     dependency: "direct main"
     description:
       name: firebase_core
-      sha256: "75f747cafd7cbd6c00b908e3a7aa59fc31593d46ba8165d9ee8a79e69464a394"
+      sha256: "239e4ac688674a7e7b5476fd16b0d8e2b5a453d464f32091af3ce1df4ebb7316"
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.0"
+    version: "2.10.0"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
-      sha256: "5615b30c36f55b2777d0533771deda7e5730e769e5d3cb7fda79e9bed86cfa55"
+      sha256: "0df0a064ab0cad7f8836291ca6f3272edd7b83ad5b3540478ee46a0849d8022b"
       url: "https://pub.dev"
     source: hosted
-    version: "4.5.3"
+    version: "4.6.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
-      sha256: "0c1cf1f1022d2245ac117443bb95207952ca770281524d2908e323bc063fb8ff"
+      sha256: "347351a8f0518f3343d79a9a0690fa67ad232fc32e2ea270677791949eac792b"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.2"
+    version: "2.3.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -160,6 +168,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.6.5"
+  google_fonts:
+    dependency: "direct main"
+    description:
+      name: google_fonts
+      sha256: "927573f2e8a8d65c17931e21918ad0ab0666b1b636537de7c4932bdb487b190f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.3"
   http:
     dependency: "direct main"
     description:
@@ -180,10 +196,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
+      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.0"
+    version: "0.18.1"
   js:
     dependency: transitive
     description:
@@ -232,6 +248,30 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
+  path_provider:
+    dependency: transitive
+    description:
+      name: path_provider
+      sha256: c7edf82217d4b2952b2129a61d3ad60f1075b9299e629e149a8d2e39c2e6aad4
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.14"
+  path_provider_android:
+    dependency: transitive
+    description:
+      name: path_provider_android
+      sha256: da97262be945a72270513700a92b39dd2f4a54dad55d061687e2e37a6390366a
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.25"
+  path_provider_foundation:
+    dependency: transitive
+    description:
+      name: path_provider_foundation
+      sha256: ad4c4d011830462633f03eb34445a45345673dfd4faf1ab0b4735fbd93b19183
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.2.2"
   path_provider_linux:
     dependency: transitive
     description:
@@ -292,10 +332,10 @@ packages:
     dependency: transitive
     description:
       name: shared_preferences_android
-      sha256: "8304d8a1f7d21a429f91dee552792249362b68a331ac5c3c1caf370f658873f6"
+      sha256: "7fa90471a6875d26ad78c7e4a675874b2043874586891128dc5899662c97db46"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.0"
+    version: "2.1.2"
   shared_preferences_foundation:
     dependency: transitive
     description:
@@ -377,26 +417,26 @@ packages:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_charts
-      sha256: "724a4758fbdb79d8446fe1720d1b003ba493aedc84cd6df22c8209fe66c2219e"
+      sha256: afc6ddd660c898a3af3f4fe47cfc9219407bcea497c992854e102aa9dcd5a477
       url: "https://pub.dev"
     source: hosted
-    version: "21.1.39"
+    version: "21.1.41"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
-      sha256: "3659bd6b4774ff95ce22b624be932f009c20913a99baf8898166ba2d36b73156"
+      sha256: "05b079cb1be26a8d5c1afe714172d2eed9178049f4a7dc773b2cbb8b053eff8d"
       url: "https://pub.dev"
     source: hosted
-    version: "21.1.39"
+    version: "21.1.41"
   syncfusion_flutter_sliders:
     dependency: "direct main"
     description:
       name: syncfusion_flutter_sliders
-      sha256: d177e0c365701c49c3a953495afa42c6847a16bec837e871056f8ca41a37b284
+      sha256: "7370875d8873e727d436b0f17b14905be5a268f640602eb674521855c54607b1"
       url: "https://pub.dev"
     source: hosted
-    version: "21.1.38"
+    version: "21.1.41"
   term_glyph:
     dependency: transitive
     description:
@@ -433,18 +473,18 @@ packages:
     dependency: transitive
     description:
       name: url_launcher_android
-      sha256: dd729390aa936bf1bdf5cd1bc7468ff340263f80a2c4f569416507667de8e3c8
+      sha256: a52628068d282d01a07cd86e6ba99e497aa45ce8c91159015b2416907d78e411
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.26"
+    version: "6.0.27"
   url_launcher_ios:
     dependency: transitive
     description:
       name: url_launcher_ios
-      sha256: bb328b24d3bccc20bdf1024a0990ac4f869d57663660de9c936fb8c043edefe3
+      sha256: "9af7ea73259886b92199f9e42c116072f05ff9bea2dcb339ab935dfc957392c2"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.18"
+    version: "6.1.4"
   url_launcher_linux:
     dependency: transitive
     description:
@@ -511,4 +551,4 @@ packages:
     version: "1.0.0"
 sdks:
   dart: ">=2.18.0 <3.0.0"
-  flutter: ">=3.0.0"
+  flutter: ">=3.3.0"

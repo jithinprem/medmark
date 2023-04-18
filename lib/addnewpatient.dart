@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:medmark/homescreen.dart';
 import 'package:medmark/patient_data.dart';
 import 'package:syncfusion_flutter_sliders/sliders.dart';
 import 'listgen.dart';
@@ -25,6 +27,17 @@ class _AddPatientState extends State<AddPatient> {
   final _nameController = TextEditingController();
   final _patientIdController = TextEditingController();
   final _additionCommentController = TextEditingController();
+  final _focusNode = FocusNode();
+
+
+  @override
+  void dispose() {
+    _nameController.dispose();
+    _patientIdController.dispose();
+    _additionCommentController.dispose();
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -100,12 +113,12 @@ class _AddPatientState extends State<AddPatient> {
                         ),
                         ListTile(
                           title: Text('Tiredness', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('lack of energy', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('lack of energy', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[1].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
                         ListTile(
                           title: Text('Drowsiness', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('feeling sleepy', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('feeling sleepy', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[2].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
                         ListTile(
@@ -120,22 +133,23 @@ class _AddPatientState extends State<AddPatient> {
                         ),
                         ListTile(
                           title: Text('Shortness of breath', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('lack of energy', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('lack of energy', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[5].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
                         ListTile(
                           title: Text('Depression', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('feeling sad', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('feeling sad', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[6].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
                         ListTile(
                           title: Text('Anxiety', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('feeling nervous', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('feeling nervous', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[7].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
+                        //Color(0xc86e8dab)
                         ListTile(
                           title: Text('Well Being', style: TextStyle(color: Colors.white70),),
-                          subtitle: Text('how you feel overall', style: TextStyle(color: Color(0xc86e8dab)),),
+                          subtitle: Text('how you feel overall', style: TextStyle(color: Color(0xFF41644A)),),
                           trailing: Text(_slider_vals[8].toString(), style: TextStyle(fontSize: 35, color: Colors.white70),),
                         ),
                         Padding(
@@ -152,22 +166,49 @@ class _AddPatientState extends State<AddPatient> {
                           padding: const EdgeInsets.all(16),
                           child: ElevatedButton(
                             onPressed: () {
-                              if(_patientIdController.text != Null && _nameController.text != Null){
-                                if(_additionCommentController.text == Null){
-                                  _additionCommentController.text = 'no comments';
-                                }
+                              // close keybord
+                              _focusNode.unfocus();
+
+                              // checking if the the patient id and name is written or not
+                              if(_patientIdController.text.length > 0 && _nameController.text.length > 0){
                                 String add_cmt = _additionCommentController.text.length > 0 ? _additionCommentController.text : 'no comments';
-                                var addDataPat = AddPatientData(patient_id: _patientIdController.text, fullname: _nameController.text, painval: _slider_vals[0].toString(), tiredness: _slider_vals[1].toString(), drowsiness: _slider_vals[2].toString(), lack_aptitite: _slider_vals[4].toString(), shortness_breath: _slider_vals[5].toString(), depression: _slider_vals[6].toString(), anxiety: _slider_vals[7].toString(), nausea: _slider_vals[3].toString(), wellbeing: _slider_vals[8].toString(), additional_comment: add_cmt);
+                                var addDataPat = AddPatientData(patient_id: _patientIdController.text.trim(), fullname: _nameController.text.trim(), painval: _slider_vals[0].toString(), tiredness: _slider_vals[1].toString(), drowsiness: _slider_vals[2].toString(), lack_aptitite: _slider_vals[4].toString(), shortness_breath: _slider_vals[5].toString(), depression: _slider_vals[6].toString(), anxiety: _slider_vals[7].toString(), nausea: _slider_vals[3].toString(), wellbeing: _slider_vals[8].toString(), additional_comment: add_cmt);
                                 UserRepository().add_my_patient(addDataPat);
                                 UserRepository().addToExel(addDataPat, context);
-                                //UserRepository().addUserVal(addDataPat);
-                                // add to exel
+                              }
+                              else{
+                                // patient name and id not written create a alert popup
+                                print('nothing entered ');
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(6.0),
+                                      ),
+                                      backgroundColor: Colors.white70,
+                                      icon: Icon(Icons.error, color: Colors.redAccent,size: 40,),
+                                      title: Text('Name or Id not entered!', style: GoogleFonts.lato(textStyle: TextStyle(fontSize: 24)),),
+                                      content: Text('please enter name and id to continue.', style: GoogleFonts.roboto(),),
+                                      actions: [
+                                        TextButton(
+                                          child: Text('OK', style: GoogleFonts.lato(textStyle: TextStyle(color: Colors.black87)),),
+                                          onPressed: (){
+                                            Navigator.pop(context);
+                                            Navigator.pop(context);
+                                            },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+
                               }
 
                             },
                             child: Text('Submit it'),
                             style: ButtonStyle(
-                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xec5b7793)),
+                              backgroundColor: MaterialStateProperty.all<Color>(Color(0xFF41644A)),
                             ),
                           ),
                         ),
@@ -191,7 +232,7 @@ class _AddPatientState extends State<AddPatient> {
                     showTicks: false,
                     showLabels: false,
                     enableTooltip: true,
-                    activeColor: Color(0xec5b7793),
+                    activeColor: Color(0xFF41644A),
                     inactiveColor: Colors.black38,
                     //minorTicksPerInterval: 1,
                     onChanged: (dynamic value) {

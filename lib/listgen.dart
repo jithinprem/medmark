@@ -29,7 +29,7 @@ class _ListAttState extends State<ListAtt> {
             });
           },
           child: Container(
-            color: selectedIndex == index ? Color(0xFF34495e) : null,
+            color: selectedIndex == index ? Color(0xB541644A) : null,
             child: widget.myList[index],
           ),
         );

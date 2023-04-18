@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 
@@ -12,16 +13,16 @@ class PatientData {
   PatientData(this.category, this.value);
 }
 List<Color> bluePalette = [
-  Color(0xFFEFF7FB),
-  Color(0xFFD7EFFB),
-  Color(0xFFBEE7FB),
-  Color(0xFFA5DFFF),
-  Color(0xFF8DC7FF),
-  Color(0xFF74BFFF),
-  Color(0xFF5DA5DA),
-  Color(0xFF4A8AC6),
-  Color(0xFF386FAF),
-  Color(0xFF255494),
+  Color(0xFFE8F5E9),
+  Color(0xFFC8E6C9),
+  Color(0xFFA5D6A7),
+  Color(0xFF81C784),
+  Color(0xFF66BB6A),
+  Color(0xFF4CAF50),
+  Color(0xFF43A047),
+  Color(0xFF388E3C),
+  Color(0xFF2E7D32),
+  Color(0xFF1B5E20),
 ];
 
 class Search extends StatefulWidget {
@@ -100,15 +101,15 @@ class _SearchState extends State<Search> {
         });
         print('value of the pain is : '+  pain);
         this.patientDataList = [
-          PatientData('pain 🤕', double.parse(pain).toInt()),
-          PatientData('drowsiness', double.parse(drowsiness).toInt()),
-          PatientData('anxiety 😰', double.parse(anxiety).toInt()),
-          PatientData('depression', double.parse(depression).toInt()),
-          PatientData('nausea', double.parse(nausea).toInt()),
-          PatientData('short 😮‍💨', double.parse(shortness_breath).toInt()),
-          PatientData('tiredness', double.parse(tiredness).toInt()),
-          PatientData('lack 😋', double.parse(lack_appetite).toInt()),
-          PatientData('wellbeing', double.parse(best_wellbeing).toInt()),
+          PatientData('pain', double.parse(pain).toInt()),
+          PatientData('drow', double.parse(drowsiness).toInt()),
+          PatientData('anx', double.parse(anxiety).toInt()),
+          PatientData('depr', double.parse(depression).toInt()),
+          PatientData('naus', double.parse(nausea).toInt()),
+          PatientData('short_b', double.parse(shortness_breath).toInt()),
+          PatientData('tired', double.parse(tiredness).toInt()),
+          PatientData('lack app.', double.parse(lack_appetite).toInt()),
+          PatientData('well', double.parse(best_wellbeing).toInt()),
         ];
 
         totalPatientList.add(this.patientDataList);
@@ -172,24 +173,44 @@ class _SearchState extends State<Search> {
                     this.detailList[index]['shortness_breath'];
                 String? tiredness = this.detailList[index]['tiredness'];
 
-                return Card(
-                  child: Center(
-                    child: SfCartesianChart(
-                      primaryXAxis: CategoryAxis(
-                        labelRotation: 310, // rotate the labels by 90 degrees
+                return SizedBox(
+                  height: 270,
+                  child: Card(
+                    child: Center(
+                      child: Column(
+                        children: [
+                          Expanded(
+                            flex: 5,
+                            child: SfCartesianChart(
+                              primaryXAxis: CategoryAxis(
+                                labelRotation: 310, // rotate the labels by 90 degrees
+                              ),
+                              title: ChartTitle(text: 'recorded :' + date, textStyle: TextStyle(color: Colors.white, fontWeight: FontWeight.w700, fontSize: 12, fontFamily: 'sans-serif')),
+                              series: <ChartSeries>[
+                                ColumnSeries<PatientData, String>(
+                                  dataSource: this.totalPatientList[index],
+                                  xValueMapper: (PatientData data, _) => data.category,
+                                  yValueMapper: (PatientData data, _) => data.value,
+                                  dataLabelSettings: DataLabelSettings(isVisible: true),
+                                  enableTooltip: true,
+                                  pointColorMapper: (PatientData data, _) => bluePalette[data.value]
+                                  ,
+                                ),
+                              ],
+                            ),
+                          ),
+                          Expanded(
+                            flex: 1,
+                            child: ListTile(
+                              tileColor: Colors.grey[900],
+                              title: Padding(
+                                padding: const EdgeInsets.only(bottom: 7),
+                                child: Text(this.detailList[index]['additional_comments'], style: GoogleFonts.lato(),),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      title: ChartTitle(text: 'Dated :' + date, textStyle: TextStyle(color: Colors.blueAccent, fontWeight: FontWeight.w700, fontSize: 12)),
-                      series: <ChartSeries>[
-                        ColumnSeries<PatientData, String>(
-                          dataSource: this.totalPatientList[index],
-                          xValueMapper: (PatientData data, _) => data.category,
-                          yValueMapper: (PatientData data, _) => data.value,
-                          dataLabelSettings: DataLabelSettings(isVisible: true),
-                          enableTooltip: true,
-                          pointColorMapper: (PatientData data, _) => bluePalette[data.value]
-                          ,
-                        ),
-                      ],
                     ),
                   ),
                 );

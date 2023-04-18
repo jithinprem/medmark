@@ -37,7 +37,7 @@ class _SetupExelState extends State<SetupExel> {
   ];
   TextEditingController endpointController = TextEditingController();
   String endpoint = 'NOT SET!';
-  var myicon = Icons.not_interested_rounded;
+  var myicon = Icons.note_add;
   String statusText = 'end point not set !';
   Color myicon_color = Colors.redAccent;
 
@@ -62,7 +62,7 @@ class _SetupExelState extends State<SetupExel> {
     String myString = prefs.getString('endpoint') ?? 'NOT SET!';
     setState(() {
       this.endpoint = myString;
-      this.myicon = myString == 'NOT SET!' ? Icons.not_interested_rounded : Icons.verified;
+      this.myicon = myString == 'NOT SET!' ? Icons.note_add : Icons.verified;
       this.statusText = myString == 'NOT SET!' ? 'end point not set! follow instructions' : 'end point set :)';
       this.myicon_color = myString == 'NOT SET!' ? Colors.redAccent : Colors.lightGreen;
     });
@@ -73,7 +73,7 @@ class _SetupExelState extends State<SetupExel> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.remove('endpoint');
     setState((){
-      this.myicon = Icons.not_interested_rounded;
+      this.myicon = Icons.note_add;
       this.myicon_color = Colors.redAccent;
       this.statusText = 'end point not set! follow instructions';
     });
@@ -81,7 +81,7 @@ class _SetupExelState extends State<SetupExel> {
 
   Return_set_notset_Icon() {
     if (endpoint != 'NOT SET!') {
-      myicon = Icons.not_interested_rounded;
+      myicon = Icons.note_add;
     } else {
       myicon = Icons.verified;
     }
@@ -108,6 +108,7 @@ class _SetupExelState extends State<SetupExel> {
                         width: 300,
                         // margin: EdgeInsets.symmetric(horizontal: 1),
                         child: Card(
+                          color: Colors.grey[900],
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[

@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:medmark/patient_data.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -32,7 +33,7 @@ class UserRepository extends GetxController{
     DateTime now = DateTime.now();
     String formattedDate = '${now.day}-${now.month}-${now.year}';
     //formattedDate = formattedDate + '';
-    formattedDate = '12-4-2023';
+    //formattedDate = '12-4-2023';
     final Map<String, dynamic> marksData = {
         'name' : addDataPat.fullname,
         'pain' : addDataPat.painval,
@@ -120,41 +121,50 @@ class UserRepository extends GetxController{
       // Show success alert dialog
       showDialog(
         context: context,
-        builder: (_) => AlertDialog(
-          title: Icon(
-            Icons.check_circle,
-            color: Colors.green,
-            size: 64,
-          ),
-          content: Text('Success!'),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.of(context).pop(),
-              child: Text('OK'),
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
             ),
-          ],
-        ),
+            backgroundColor: Colors.white,
+            icon: Icon(Icons.verified, color: Colors.green,size: 40,),
+            title: Text('Success :)', style: GoogleFonts.lato(textStyle: TextStyle(fontSize: 24)),),
+            content: Text('data updated successfully.', style: GoogleFonts.roboto(),),
+            actions: [
+              TextButton(
+                child: Text('OK', style: GoogleFonts.lato(textStyle: TextStyle(color: Colors.black87)),),
+                onPressed: () {
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                  },
+              ),
+            ],
+          );
+        },
       );
     } else {
       print('error code is : ');
       print(response.statusCode);
       // Handle API errors here
       showDialog(
-          context: context,
-          builder: (_) => AlertDialog(
-        title: Icon(
-          Icons.sms_failed,
-          color: Colors.redAccent,
-          size: 64,
-        ),
-        content: Text('Failed!'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: Text('OK'),
-          ),
-        ],
-      ),
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(6.0),
+            ),
+            backgroundColor: Colors.white,
+            icon: Icon(Icons.error, color: Colors.redAccent,size: 40,),
+            title: Text('Failed', style: GoogleFonts.lato(textStyle: TextStyle(fontSize: 24)),),
+            content: Text('error updating on excel', style: GoogleFonts.roboto(),),
+            actions: [
+              TextButton(
+                child: Text('OK', style: GoogleFonts.lato(textStyle: TextStyle(color: Colors.black87)),),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          );
+        },
       );
     }
 
