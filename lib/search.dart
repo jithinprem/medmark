@@ -44,7 +44,6 @@ class _SearchState extends State<Search> {
 
   // lists
   List<Map<String, dynamic>> detailList = [];
-  List<DocumentSnapshot> _searchResults = [];
   List<PatientData> patientDataList = [];
   List<List<PatientData>> totalPatientList = [];
 
@@ -59,9 +58,6 @@ class _SearchState extends State<Search> {
         .collection('date');
     final QuerySnapshot dateDocs = await fireinst.get();
 
-    setState(() {
-      _searchResults = dateDocs.docs;
-    });
 
     if (dateDocs.docs.isNotEmpty) {
       // if the date sub-collection is not empty, print data for each date

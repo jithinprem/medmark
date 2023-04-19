@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
+import 'homescreen.dart';
 
 String curEndPoint = 'None';
 
@@ -202,6 +203,11 @@ class _SetupExelState extends State<SetupExel> {
                               child: Text('Remove', style: TextStyle(color: Colors.orangeAccent),),
                               onPressed: (){
                                 //remove shared prefrence
+                                setState(() {
+                                  endpointAlert = 'Exel endpoint not set !';
+                                  setIcon = Icons.error;
+                                  setColor = Colors.redAccent;
+                                });
                                 removeShared();
                               },
                             ),

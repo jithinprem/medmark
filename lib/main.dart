@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medmark/addnewpatient.dart';
+import 'package:medmark/analyze.dart';
 import 'package:medmark/homescreen.dart';
 import 'package:medmark/search.dart';
 import 'package:medmark/setup_exel.dart';
@@ -32,6 +33,7 @@ class MyApp extends StatelessWidget {
         Display.id : (context) => Display(),
         SetupExel.id : (context) => SetupExel(),
         Search.id : (context) => Search(),
+        Analyze.id : (context) => Analyze(),
       },
     );
   }

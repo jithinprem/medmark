@@ -43,6 +43,7 @@ dependencies:
   http: ^0.13.5
   syncfusion_flutter_charts: ^21.1.41
   google_fonts: ^4.0.3
+  flutter_launcher_icons: ^0.13.0
 
 dev_dependencies:
   flutter_test:
@@ -96,3 +97,17 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "lib/assets/images/logo.png"
+  adaptive_icon_background: "#ffffff"
+  adaptive_icon_foreground: "lib/assets/images/back.jpg"
+  ios_platforms:
+    iphone: true
+    ipad: true
+    ios: true
+    macos: false
+    apple_watch: false
+    apple_tv: false

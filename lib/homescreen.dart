@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medmark/addnewpatient.dart';
+import 'package:medmark/analyze.dart';
 import 'package:medmark/search.dart';
 import 'package:medmark/setup_exel.dart';
 import 'package:medmark/test.dart';
@@ -8,6 +9,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
+
+// to show if the endpoint is set or not
+String endpointAlert = 'Exel endpoint not set !';
+IconData setIcon = Icons.error;
+Color setColor = Colors.redAccent;
 
 // class for graph display in the card widget
 class DataPoint {
@@ -32,9 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
   // variables
   String formattedDate = '';
   String formattedDay = '';
-  String endpointAlert = 'Exel endpoint not set !';
-  IconData setIcon = Icons.error;
-  Color setColor = Colors.redAccent;
 
 
   @override
@@ -49,12 +52,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     // check if endpoint is set or not
     checkEndpointExist();
-
-    Random random = Random();
-    for(int i = 1; i <= 10; i++) {
-      dataPoints.add(DataPoint(x: i.toDouble(), y : random.nextDouble() * 10.0));
-    }
   }
+  
 
   // get data from shared prefrence
   checkEndpointExist() async{
@@ -66,6 +65,12 @@ class _HomeScreenState extends State<HomeScreen> {
         setColor = Colors.green;
         endpointAlert = 'Exel Endpoint set';
 
+      });
+    }else{
+      setState(() {
+        setIcon = Icons.error;
+        setColor = Colors.redAccent;
+        endpointAlert = 'Exel Endpoint not set';
       });
     }
   }
@@ -81,10 +86,12 @@ class _HomeScreenState extends State<HomeScreen> {
       home: SafeArea(
         child: Scaffold(
           body: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               Expanded(
                 child: Container(
-                  height: 140,
+                  height: 200,
                   color: Colors.black38,
                   child: Column(
                     children: [
@@ -169,6 +176,8 @@ class _HomeScreenState extends State<HomeScreen> {
               GestureDetector(
                 onTap: (){
                   print('card was clicked');
+                  // open analyze
+                  Navigator.pushNamed(context,Analyze.id);
                 },
                 child: Card(
                   color: Colors.grey[900],
@@ -196,8 +205,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(setIcon, color: setColor,),
-                      title: Text(endpointAlert, style: GoogleFonts.lato()),
+                      //leading: Icon(setIcon, color: setColor,),
+                      //title: Text(endpointAlert, style: GoogleFonts.lato()),
+                      leading: Icon(Icons.note_add, color: Colors.white38,),
+                      title: Text('Update Endpoint', style: GoogleFonts.lato(color: Colors.white38),),
+                      subtitle: Text('instructions to set endpoint', style: GoogleFonts.lato(),),
                       tileColor: Colors.grey[900],
                       trailing: Padding(
                         padding: const EdgeInsets.only(right: 70),
